@@ -5,9 +5,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * @author QuangNT
+ * The Class Main.
+ */
 public class Main {
 
+    /**
+     * The main method.
+     *
+     * @param args the arguments
+     */
     public static void main(String[] args) {
+
+        // List data training
         List<DataRow> dataTraining = new ArrayList<>();
 
         dataTraining.add(new DataRow("d1", "hanoi pho chaolong hanoi", "B"));
@@ -45,6 +56,7 @@ public class Main {
             System.out.println();
         }
 
+        // List data test
         DataRow dataTest1 = new DataRow("d", "hanoi hanoi buncha hutiu");
         DataRow dataTest2 = new DataRow("d", "pho hutiu banhbo");
         DataRow dataTest3 = new DataRow("d", "mientrung caolau pho hutiu buncha");
@@ -56,11 +68,24 @@ public class Main {
         System.out.println("Result: " + result);
     }
 
+    /**
+     * Find result.
+     *
+     * @param listResult the list result
+     * @param predicts the predicts
+     * @return the string
+     */
     private static String findResult(Set<String> listResult, List<Double> predicts) {
         int dirMax = findMaxPredict(predicts);
         return new ArrayList<>(listResult).get(dirMax);
     }
 
+    /**
+     * Find max predict.
+     *
+     * @param predicts the predicts
+     * @return the int
+     */
     private static int findMaxPredict(List<Double> predicts) {
         double max = predicts.get(0);
         int dirMax = 0;
@@ -73,6 +98,17 @@ public class Main {
         return dirMax;
     }
 
+    /**
+     * Gets the predict.
+     *
+     * @param listVector the list vector
+     * @param bagOfWords the bag of words
+     * @param listResult the list result
+     * @param listCountResult the list count result
+     * @param dataSize the data size
+     * @param dataTest the data test
+     * @return the predict
+     */
     private static List<Double> getPredict(List<int[]> listVector, Set<String> bagOfWords, Set<String> listResult,
             List<Integer> listCountResult, int dataSize, DataRow dataTest) {
         List<Double> predicts = new ArrayList<Double>();
@@ -106,6 +142,12 @@ public class Main {
         return finalPredicts;
     }
 
+    /**
+     * Sum vector.
+     *
+     * @param vector the vector
+     * @return the int
+     */
     private static int sumVector(int[] vector) {
         int sum = 0;
         for (int i = 0; i < vector.length; i++) {
@@ -114,6 +156,13 @@ public class Main {
         return sum;
     }
 
+    /**
+     * Gets the list count result.
+     *
+     * @param dataTraining the data training
+     * @param listResult the list result
+     * @return the list count result
+     */
     private static List<Integer> getListCountResult(List<DataRow> dataTraining, Set<String> listResult) {
         List<Integer> listCountResult = new ArrayList<Integer>();
         for (String result : listResult) {
@@ -128,6 +177,14 @@ public class Main {
         return listCountResult;
     }
 
+    /**
+     * Gets the list vector.
+     *
+     * @param dataTraining the data training
+     * @param listResult the list result
+     * @param bagOfWords the bag of words
+     * @return the list vector
+     */
     private static List<int[]> getListVector(List<DataRow> dataTraining, Set<String> listResult,
             Set<String> bagOfWords) {
         List<int[]> listVector = new ArrayList<int[]>();
@@ -149,6 +206,12 @@ public class Main {
         return listVector;
     }
 
+    /**
+     * Gets the list result.
+     *
+     * @param dataTraining the data training
+     * @return the list result
+     */
     private static Set<String> getListResult(List<DataRow> dataTraining) {
         Set<String> listResult = new HashSet<String>();
         for (DataRow row : dataTraining) {
@@ -159,6 +222,12 @@ public class Main {
         return listResult;
     }
 
+    /**
+     * Gets the bag of words.
+     *
+     * @param dataTraining the data training
+     * @return the bag of words
+     */
     private static Set<String> getBagOfWords(List<DataRow> dataTraining) {
         Set<String> bagOfWords = new HashSet<String>();
         for (DataRow row : dataTraining) {
